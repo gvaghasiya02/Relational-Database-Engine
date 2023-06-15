@@ -1,0 +1,53 @@
+1. Basic information
+Student ID : 00001632286
+Student Name : Juan Manuel Zuluaga
+
+Student ID : 00001653053
+Student Name : Kaushil Kundalia
+
+Student ID : 00001653448
+Student Name : Gaurav Nareshbhai Vaghasiya
+
+OS (bit) : Windows 11 Home 22H2, Linux 22.04
+gcc version : gcc (Built by MSYS2 project) 12.2.0
+
+
+2. Internal Record Format
+- Record format: We're using a variation of approach-4 where:
+	- attributeOffset: sotres where each slot points the offset of individual field in record data
+	- recorData: Data coming in from the user.
+
+---------- Record Representation ----------------
+
+               attribOffset
+                    |  
+formatted record: |5 9|0  12  23
+           bytes:       1   5   9
+
+-------------------------------------------------
+
+
+
+
+3. Page Format
+
+
+- Page footer: Page size is 4096 out of which:
+	- Large 4 bytes are reserved by slotNumber
+	- Last 8-4 reserved for nextRecordWritePtr which says from where the next record should be written
+	- All subsequent bytes sotre the pointer where the record (that belongs to that slotId) starts
+	
+- Footer representation:
+	|slotId2|slotId1|nextRecordWritePtr|slotCount|
+
+
+
+
+4. Implementation Detail
+For project 1 we made multiple assumptions, in order to have a more organized file system. First, we considered an unique
+infinite file wiath capacity to store as many pages as it gets, every page with a size of 4096 bytes, within every page the
+number of records might vary depending on how much space is needed for the varchar field. At the end of every page there's a
+footer in which information about the slots within the page is recorded.
+
+
+

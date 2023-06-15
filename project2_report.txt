@@ -1,0 +1,63 @@
+1. Basic information
+Student ID : 00001632286
+Student Name : Juan Manuel Zuluaga
+
+Student ID : 00001653053
+Student Name : Kaushil Kundalia
+
+Student ID : 00001653448
+Student Name : Gaurav Nareshbhai Vaghasiya
+
+OS (bit) : Linux 22.04
+gcc version : gcc (Built by MSYS2 project) 12.2.0
+
+
+2. Meta-data
+- "Tables" rows:
+    - table-id
+    - table-name
+    - file-name
+    - system-table: 1 if it is system table.
+
+- "Coluns" rows:
+    - table-id
+    - column-name
+    - column-type
+    - column-length
+    - column-position
+    - column-exists
+
+
+3. Internal Record Format
+- Record format: We're using a variation of approach-4 where:
+	- attributeOffset: sotres where each slot points the offset of individual field in record data
+	- recorData: Data coming in from the user.
+
+---------- Record Representation ----------------
+
+               attribOffset
+                    |  
+formatted record: |5 9|0  12  23
+           bytes:       1   5   9
+
+-------------------------------------------------
+
+
+4. Page Format
+
+
+- Page footer: Page size is 4096 out of which:
+	- Large 4 bytes are reserved by slotNumber
+	- Last 8-4 reserved for nextRecordWritePtr which says from where the next record should be written
+	- All subsequent bytes sotre the pointer where the record (that belongs to that slotId) starts
+	
+- Footer representation:
+	|slotId2|slotId1|nextRecordWritePtr|slotCount|
+
+
+5. File Format
+- Each table has its own file. The file-name is stored in the Table table.
+
+
+6. Implementation Detail
+- All the interaction with pages happen through the RBFM layer. There are certain pre-requisits that the RBFM layer requires. 

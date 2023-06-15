@@ -1,0 +1,14 @@
+scratchpad.cc
+scratchpad
+test_file_*
+.vscode/*
+rbf/*.a
+rbf/*.o
+rbf/*.exe
+rbf/test*
+.idea
+rm/*.a
+rm/*.o
+rm/*.exe
+rm/columns
+rm/tables
